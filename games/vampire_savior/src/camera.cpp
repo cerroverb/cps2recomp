@@ -10,6 +10,7 @@
 // What the modes and widescreen do to the camera is here, in the rules they change: a mode can have it go
 // to a place of its own (modes.h, CameraAt), and in a wide picture its ends are 64 in from the board's.
 #include "model.h"
+#include "session.h"
 #include "modes.h"
 #include "stage.h"
 #include "widescreen.h"
@@ -177,16 +178,8 @@ namespace {
     // one), and not in the model viewer, which has sizes of its own.
     constexpr int kFocusLift = 44;
     bool Focus(int player, int &x, int &y) {
-        if (model::On()) {
-            return false;
-        }
-        for (int n = 0; n < 2; n++) {
-            if (Ram16(Player(n) + kHealth) > kHealthFull || Ram16(Player(n) + kHealthCeiling) > kHealthFull) {
-                return false;
-            }
-        }
-        const uint8_t clock = Ram8(kClock);
-        if (clock == 0 || clock > kClockFull) {
+        // (the fight itself: not the round's call, the knock-out or the win)
+        if (model::On() || !session::FightLive()) {
             return false;
         }
         x = Signed(Ram16(Player(player) + kX)) - Signed(Ram16(kCameraX)) + WideStage();

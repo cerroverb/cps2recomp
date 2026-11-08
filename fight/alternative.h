@@ -133,7 +133,8 @@ CameraWanted &CameraAt();
 bool RoundFought();
 // The window's zoom on a fighter (runtime/game.h, Game::focus; port/zoom.h), for a game's sources: `place` gives where
 // player `player`'s fighter stands in the picture (the middle of its feet, widescreen's columns counted), and the zoom
-// looks `lift` lines above that; a fighter stands about `tall` lines from its feet up. Only while a round is fought, and
+// looks `lift` lines above that; a fighter stands about `tall` lines from its feet up. Only while the fight is on
+// (session::FightLive: not the round's call, the knock-out or the win), and
 // not in the model viewer, which has sizes of its own.
 void Focus(void (*place)(int player, int &x, int &y), int lift, int tall);
 // Players are choosing their characters, both in

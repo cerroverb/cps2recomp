@@ -228,6 +228,34 @@ bool NoKnockOut() {
     return InSession() || modes::StageViewer() || BattleNoKnockOut();
 }
 
+bool FightLive() {
+    static bool inRound = false, ticked = false;
+    static uint8_t clockAtStart = 0;
+    if (!modes::RoundFought() || !d.health) {
+        inRound = false;
+        return false;
+    }
+    const bool stillClock = NoClock() || FeatureOn("infinite_time") || !d.clock;
+    const uint8_t clock = d.clock ? Ram8(d.clock) : 0;
+    if (!inRound) {
+        inRound = true;
+        ticked = false;
+        clockAtStart = clock;
+    }
+    ticked = ticked || clock != clockAtStart;
+    if (!stillClock && (!ticked || clock == 0)) {
+        return false;
+    }
+    if (!NoKnockOut()) {
+        for (int n = 0; n < 2; n++) {
+            if (static_cast<int16_t>(Ram16(Player(n) + d.health)) <= 0) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
 void Step(int player, const fight::StepView &view) {
     g_frames.Step(player, view);
     if (d.moveStart && FeatureOn("frame_log")) {

@@ -55,6 +55,21 @@ def main():
         def order(g):
             cfg = load(g)
             return (cfg.get("series") or cfg.get("name", g), cfg.get("name", g))
+        # Every game says its series, so that none is left out of its group by being forgotten: `series = ` (nothing) for
+        # a game of no series; and a game whose name has a series' name in it ("Hyper Street Fighter II ...") is in it
+        configs = {g: load(g) for g in args[2:]}
+        series = {cfg["series"] for cfg in configs.values() if cfg.get("series")}
+        wrong = []
+        for g, cfg in sorted(configs.items()):
+            if "series" not in cfg:
+                wrong.append("games/%s/game.cfg: no series line (series = NAME, or series = with nothing for none)" % g)
+                continue
+            name = " %s " % cfg.get("name", g)
+            for other in series:
+                if " %s " % other in name and cfg["series"] != other:
+                    wrong.append("games/%s/game.cfg: named %s, but series = %s, not %s" % (g, cfg.get("name", g), cfg["series"], other))
+        if wrong:
+            sys.exit("gamecfg.py --collection:\n  " + "\n  ".join(wrong))
         for game in sorted(args[2:], key=order):
             cfg = load(game)
             cfg.setdefault("id", game)

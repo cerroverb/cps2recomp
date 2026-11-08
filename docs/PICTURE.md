@@ -45,7 +45,7 @@ picture as it was.
 In the fighting games, hold the left stick's click and press the left shoulder to zoom in on player 1's fighter,
 the right shoulder for player 2's (keyboard: hold Left Shift and press Q or E). Each press goes a size up, 1.25x to
 2x, then back to the whole picture. With the click held, the d-pad moves the camera; the right stick's click
-(keyboard: Left Shift and W) keeps **both fighters** in the picture instead, as close as shows both whole; pressed again, it is **By distance**
+(keyboard: Left Shift and W) keeps both fighters in the picture instead (**Cinematic**), as close as shows both whole; pressed again, it is **By distance**
 (below), and once more, off. The zoom is
 the window's alone: the game plays the same.
 

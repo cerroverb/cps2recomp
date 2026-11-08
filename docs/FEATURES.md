@@ -114,7 +114,7 @@ features with `fNAME=N` and runs commands with `cNAME`).
 The window can show part of the picture larger, about one player's fighter (`port/zoom.h`): a gamepad's left
 stick's click held and a shoulder pressed, left for player 1 and right for player 2, at 1.25x to 2x (keyboard:
 Left Shift held, Q and E). The fighter stays in the middle; the d-pad (arrows) with the click (Shift) held moves
-the camera off it. The right stick's click (W) keeps both fighters in the picture instead, as close as shows both
+the camera off it. The right stick's click (W) keeps both fighters in the picture instead (Cinematic), as close as shows both
 whole (again: by their distance; once more: off); how much room a fighter takes is `Game::focusTall` (from its feet up) and `focusLift`. It is the
 window's alone (the game, save states and screenshots never see it). A game has it once its sources say where to
 look: `TheGame().focus = [](int player, int &x, int &y) { ...; return true; }`, the place in the picture's pixels

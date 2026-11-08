@@ -9,7 +9,11 @@
   distance**, a camera made for playing: a little closer than the whole picture as a round starts, a quarter closer as
   the fighters come together, out to the whole picture as they part, both fighters always in it. The health bars, clock
   and the rest of the game's panel stay where they are and at their size. `--zoom 1:4` starts with it, and the
-  zoom's both-fighters press (L3 and R3, Left Shift and W, the touch Zoom button) goes on to it, then off.
+  zoom's both-fighters press (L3 and R3, Left Shift and W, the touch Zoom button) goes on to it, then off. Also over
+  another game's stage (Vampire Savior Definitive, the Alpha and Vampire Savior games).
+- The zoom on both fighters is now called **Cinematic**, and every zoom follows the fight only while it is on: not the
+  round's call, the knock-out, the win or what comes between rounds (in training mode and the other modes, from the
+  round's start).
 - **Cyberbots: Fullmetal Madness** (#135), set `cybots` (Europe 950424, the set FBNeo and Fightcade play): Capcom's
   giant-robot fighter, with everything the other fighting games have: free play (the game's own), straight to the
   title, the Board page, the cheats, a custom soundtrack with its music named, a training mode (hit boxes, frame data

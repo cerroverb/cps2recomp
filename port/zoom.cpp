@@ -73,7 +73,7 @@ void Zoom::Said() {
     if (m_size == 0) {
         snprintf(m_label, sizeof(m_label), "ZOOM OFF");
     } else if (m_player == kBoth) {
-        snprintf(m_label, sizeof(m_label), "ZOOM  BOTH FIGHTERS");
+        snprintf(m_label, sizeof(m_label), "ZOOM  CINEMATIC");
     } else if (m_player == kDistance) {
         snprintf(m_label, sizeof(m_label), "ZOOM  BY DISTANCE");
     } else {
@@ -103,7 +103,7 @@ void Zoom::Both() {
     if (!Possible()) {
         return;
     }
-    // (round the three: both fighters, by their distance, off)
+    // (round the three: cinematic, by their distance, off)
     if (m_size > 0 && m_player == kBoth) {
         m_player = kDistance;
     } else if (m_size > 0 && m_player == kDistance) {

@@ -5,6 +5,7 @@
 // Fighter Alpha 2's, which were the same but for where each game keeps things.
 #include "alternative.h"
 #include "model.h"
+#include "session.h"
 
 #include "spare.h"
 #include "state.h"
@@ -383,7 +384,7 @@ void Focus(void (*place)(int player, int &x, int &y), int lift, int tall) {
     TheGame().focusLift = lift;
     TheGame().focusTall = tall;
     TheGame().focus = [](int player, int &x, int &y) {
-        if (!RoundFought() || model::On()) {
+        if (!session::FightLive() || model::On()) {
             return false;
         }
         g_place(player, x, y);

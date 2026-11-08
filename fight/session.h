@@ -129,6 +129,11 @@ int WantedStage();
 // No clock, and nobody knocked out: a session, the stage viewer, or a fighting mode that wants it
 bool NoClock();
 bool NoKnockOut();
+// The fight itself is on: a round being fought (modes::RoundFought), from its clock's first tick (the round's call over)
+// until a fighter is knocked out or the time is up; for the window's zoom (port/zoom.h), which leaves the round's call,
+// the knock-out and the win alone. Where the clock stands still on purpose (a session, a mode, the cheat), from the
+// round's start.
+bool FightLive();
 
 // From the game's hooks: a player's step of a fight; a hit landing on a player or guarded; a hit's damage taken (a chip
 // off a guarded hit is never part of a combo)

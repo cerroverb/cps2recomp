@@ -10,7 +10,7 @@
 // (runtime/game.h, Game::focus), and only while there is one: elsewhere the picture goes back to its own size.
 // It is the window's alone: the game, its save states and its screenshots know nothing of it.
 //
-// Or both fighters at once: the camera is as close as keeps both in the picture (2x at most, the whole picture at
+// Or both fighters at once (cinematic): the camera is as close as keeps both in the picture (2x at most, the whole picture at
 // least), between them, and inside the picture's edges: tight when they are close, wide when they are apart.
 //
 // Or by the fighters' distance, as some other fighting games' cameras do (issue #272): a little closer than the whole

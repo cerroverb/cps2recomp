@@ -563,12 +563,12 @@ void RegisterPortFeatures() {
     if (Zoom::Possible()) {
         TheGame().features.push_back({"zoom", "Display", "Zoom",
                                       "The picture shown larger about a fighter, following it: player 1's or player 2's (1.5x; the "
-                                      "zoom's buttons change the size), or both fighters', as close as keeps them both in the "
+                                      "zoom's buttons change the size), or cinematic: both fighters', as close as keeps them both in the "
                                       "picture. Or by distance: a little closer as the fighters come together, out to all of the "
                                       "picture as they part, with the health bars and clock left as they are. Also the left "
                                       "stick's click held with a shoulder (with the right stick's: both, then by distance, then off), "
                                       "Left Shift with Q, E or W, or a touch screen's Zoom button (the same).",
-                                      kFeatureSession, {"Off", "Player 1", "Player 2", "Both fighters", "By distance"}});
+                                      kFeatureSession, {"Off", "Player 1", "Player 2", "Cinematic", "By distance"}});
     }
     // (online play's readout, each player's own: Port::Shown)
     TheGame().features.push_back({"online_ping", "Online", "Ping",

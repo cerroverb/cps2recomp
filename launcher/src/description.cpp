@@ -444,11 +444,11 @@ const launcher::Collection& launcher::describe_collection() {
              {"Off", "CRT", "CRT Lottes", "CRT Royale", "CRT Guest", "CRT Light", "Scanlines: light", "Scanlines: strong", "Scanlines: OSSC",
               "Scanlines: dark", "xBRZ", "ScaleFX", "Your own", "As each game is set"},
              13},
-            // (port/zoom.h: --zoom 1:3, the camera on both fighters from the start; 1:4, by their distance)
-            {"zoom", "Zoom", "Both fighters: in every game the camera follows the two fighters, as close as they allow (the zoom's L3 and R3 "
-             "together). By distance: a little closer as they come together, out to all of the picture as they part, the health "
+            // (port/zoom.h: --zoom 1:3, the camera on both fighters from the start (Cinematic); 1:4, by their distance)
+            {"zoom", "Zoom", "Cinematic: in every game the camera follows the two fighters, as close as they allow, the panel and all (the zoom's L3 and "
+             "R3 together, again for By distance). By distance: a little closer as they come together, out to all of the picture as they part, the health "
              "bars and clock left as they are. Off: as each game starts, all of the picture.",
-             {"Off", "Both fighters", "By distance"}},
+             {"Off", "Cinematic", "By distance"}},
         };
         // (port/frontend_sdl.cpp: in a Multi game run; each unless the player has given it to the game)
         endless.buttons = {
