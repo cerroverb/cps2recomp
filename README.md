@@ -41,10 +41,11 @@ file). Only the versions named below work for each game, and this project cannot
 | [**Super Puzzle Fighter II Turbo**](games/puzzle_fighter/README.md) (1996) | `spf2t` (Europe 960529) | A puzzle training mode and CPU battle |
 | [**Darkstalkers: The Night Warriors**](games/dstlk/README.md) (1994) | `dstlk` (Europe 940705) | Huitzil and Pyron at a switch |
 | [**Night Warriors: Darkstalkers' Revenge**](games/nwarr/README.md) (1995) | `nwarr` (Europe 950316) | Huitzil and Pyron at a switch |
+| [**Cyberbots: Fullmetal Madness**](games/cybots/README.md) (1995) | `cybots` (Europe 950424) | Giant robots on four buttons; Super-8, Gaits, Warlock and Killer Bee at a switch |
 | [**Vampire Savior**](games/vampire_savior/README.md) (1997) | `vsavj` (Japan 970519) | Tag team battle |
 | [**Vampire Savior 2**](games/vsav2/README.md) (1997) | `vsav2` (Japan 970913) | Donovan, Phobos and Pyron back |
 | [**Vampire Hunter 2**](games/vhunt2/README.md) (1997) | `vhunt2` (Japan 970929) | Night Warriors' cast on Vampire Savior's engine |
-| [**Vampire Savior Definitive**](games/vsav_definitive/README.md) (beta) | `vsavj` and `vsav2` (and `dstlk`, `nwarr`, `sfa`, `sfa2u`, `sfa3u`, `ssf2xjr1`, `msh`, `xmvsf`, `mshvsf`, `mvsc`, `xmcota`, `sgemf` for their stages) | Vampire Savior with all eighteen characters, and other games' stages |
+| [**Vampire Savior Definitive**](games/vsav_definitive/README.md) (beta) | `vsavj` and `vsav2` (and `dstlk`, `nwarr`, `sfa`, `sfa2u`, `sfa3u`, `ssf2xjr1`, `msh`, `xmvsf`, `mshvsf`, `mvsc`, `xmcota`, `sgemf`, `cybots` for their stages) | Vampire Savior with all eighteen characters, and other games' stages |
 | [**Alien vs. Predator**](games/avsp/README.md) (1994) | `avspu` (USA 940520) | Beat-'em-up: three players, a stage to start at, score attack |
 | [**Street Fighter II: Champion Edition**](games/sf2ce/README.md) (1992, CPS-1) | `sf2ce` (World 920513) | Classic CPS-1 with YM2151 and OKI sound |
 | [**Street Fighter II: Hyper Fighting**](games/sf2hf/README.md) (1992, CPS-1) | `sf2hf` (World 921209) | Classic CPS-1 with YM2151 and OKI sound |
@@ -167,12 +168,12 @@ place. Back, or the screen's **Menu**, opens the in-game menu.
   the Marvel games', Super Gem Fighter's (*Pocket Fighter* in Japan), Puzzle Fighter's, Alpha's, Alpha 3's, Super
   Turbo's, Alien vs. Predator's and Giga Wing's; each game's page names them. Other revisions don't work: each port is made from
   one version's program. Vampire Savior Definitive needs both `vsavj` and `vsav2`, and shows the first
-  Darkstalkers', Night Warriors', Alpha's, Alpha 2's, Alpha 3's, Super Turbo's, Super Gem Fighter's and five Marvel games' stages
-  with `dstlk`, `nwarr`, `sfa`, `sfa2u`, `sfa3u`, `ssf2xjr1`, `msh`, `xmvsf`, `mshvsf`, `mvsc`, `xmcota` and
-  `sgemf` too.
+  Darkstalkers', Night Warriors', Alpha's, Alpha 2's, Alpha 3's, Super Turbo's, Super Gem Fighter's, Cyberbots' and five Marvel
+  games' stages with `dstlk`, `nwarr`, `sfa`, `sfa2u`, `sfa3u`, `ssf2xjr1`, `msh`, `xmvsf`, `mshvsf`, `mvsc`, `xmcota`,
+  `sgemf` and `cybots` too.
 - macOS 13 or later (Apple silicon or Intel), Linux x86_64 or ARM64 (SteamOS included), Windows 10 or 11, 64-bit, or
   Android 9 or later on 64-bit ARM, with Vulkan.
-- A gamepad or stick is recommended (six buttons for the fighting games).
+- A gamepad or stick is recommended (six buttons for the fighting games, four for Cyberbots).
 
 ## How it works
 
@@ -223,7 +224,7 @@ The repository holds no game data and nothing derived from it.
 
 This project is not affiliated with, endorsed by, or sponsored by Capcom or Marvel. *Street Fighter*, *Super Puzzle
 Fighter*, *Super Gem Fighter*, *Pocket Fighter*, *Vampire Savior*, *Vampire Hunter*, *Night Warriors*, *Darkstalkers*, *Mega Man*,
-*Ghouls'n Ghosts*, *Strider*, *Captain Commando* and *Giga Wing* are trademarks of Capcom Co., Ltd.; *X-Men*, *Marvel Super Heroes*,
+*Ghouls'n Ghosts*, *Strider*, *Captain Commando*, *Cyberbots* and *Giga Wing* are trademarks of Capcom Co., Ltd.; *X-Men*, *Marvel Super Heroes*,
 *The Punisher* and their characters are trademarks of Marvel Characters, Inc.; *Alien vs. Predator* and *Cadillacs and Dinosaurs* are
 trademarks of their owners; "CPS-1", "CPS-2" and "QSound" are names and trademarks of their owners, used here only to
 say what the programs work with.

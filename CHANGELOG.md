@@ -2,11 +2,25 @@
 
 ## Unreleased
 
+- **The input display** (training mode, every fighting game) no longer shows the stick at rest as 5: a line shows the
+  direction held, if any, and the buttons, and nothing held is not a line (as in sf3comp).
+
 - **Zoom by distance** (issue #272): the Zoom row (Display page) and the launcher's Multi game page have **By
   distance**, a camera made for playing: a little closer than the whole picture as a round starts, a quarter closer as
   the fighters come together, out to the whole picture as they part, both fighters always in it. The health bars, clock
   and the rest of the game's panel stay where they are and at their size. `--zoom 1:4` starts with it, and the
   zoom's both-fighters press (L3 and R3, Left Shift and W, the touch Zoom button) goes on to it, then off.
+- **Cyberbots: Fullmetal Madness** (#135), set `cybots` (Europe 950424, the set FBNeo and Fightcade play): Capcom's
+  giant-robot fighter, with everything the other fighting games have: free play (the game's own), straight to the
+  title, the Board page, the cheats, a custom soundtrack with its music named, a training mode (hit boxes, frame data
+  and the meter, the input display with the game's four buttons, the dummy), attract mode, the stage viewer, the model
+  viewer, survival, endless battle, ring out, widescreen and invisible walls, the camera's zoom, custom colours and the
+  colour editor, and the four hidden machines (Super-8, Gaits, Warlock, Killer Bee) at a switch.
+- **Cyberbots' stages in the other games**: its fourteen stages, each run from its own stage code alone with its own
+  music, in Vampire Savior Definitive, the Alpha games and the Vampire Savior games, after the other guests' in the
+  lists (Cyberbots' ROM set needed).
+- The toolkit: `fight::SetButtonNames` (a game's own names for its buttons in the input display and the frame data
+  log) and `colours::Description::lineAddress` (a game whose colour set's palettes are each in a table of their own).
 
 ## 1.4.0
 
