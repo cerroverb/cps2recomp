@@ -653,10 +653,17 @@ namespace {
             uint32_t *picture = machine.Picture();
             const uint32_t *behind = board.Picture();
             const size_t pixels = static_cast<size_t>(machine.PictureWidth()) * Video::kHeight;
-            for (size_t i = 0; i < pixels; i++) {
-                const uint32_t mine = picture[i], theirs = behind[i];
-                const bool over = (mine & 0x80000000u) && ((mine & 0x40000000u) || !(theirs & 0x40000000u));
-                picture[i] = over ? mine & 0xFFFFFF : theirs & 0xFFFFFF;
+            auto over = [&](uint32_t *picture) {
+                for (size_t i = 0; i < pixels; i++) {
+                    const uint32_t mine = picture[i], theirs = behind[i];
+                    const bool over = (mine & 0x80000000u) && ((mine & 0x40000000u) || !(theirs & 0x40000000u));
+                    picture[i] = over ? mine & 0xFFFFFF : theirs & 0xFFFFFF;
+                }
+            };
+            over(picture);
+            // (and the picture without the panel, for the zoom that leaves the panel where it is: Machine::panel)
+            if (uint32_t *unpanelled = machine.UnpanelledToChange()) {
+                over(unpanelled);
             }
         }
         // The sound: the guest's music, as loud as the game's would be (its fades), while the game's stage tune is what

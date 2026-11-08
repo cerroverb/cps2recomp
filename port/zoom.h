@@ -36,7 +36,8 @@ public:
     static constexpr int kDistance = 3; // (... and when its size goes by how far apart they are)
     // A press for player `player` (0 or 1)
     void Press(int player);
-    // A press for both fighters at once: on, or off when it is on
+    // A press for both fighters at once (the two sticks' clicks): both kept in the picture, then the zoom by their
+    // distance, then off
     void Both();
     // The in-game menu's Zoom row (the session feature zoom, main.cpp): 0 off, 1 or 2 that player's fighter (at the size
     // it was at, 1.5x if none), 3 both, 4 by their distance; and what is chosen now, by the same numbers
@@ -63,6 +64,7 @@ public:
 
 private:
     void Said();
+    void StartBoth();
     int m_size = 0, m_player = 0;
     float m_shown = 1.0f, m_x = 0, m_y = 0; // as shown now
     float m_offX = 0, m_offY = 0;           // (the camera's way off its fighter, after it changed fighter)

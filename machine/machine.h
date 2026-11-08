@@ -119,13 +119,18 @@ public:
     // For the port's zoom that leaves the game's panel (its bars and clock) where it is (port/zoom.h): while `panel.object`
     // is given (the panel's objects, as Game::panel tells them; and `panel.layers`, its scroll screens), each line is
     // drawn a second time without the panel. Of the frame then, the picture without it, and which pixels of its own
-    // picture are the panel's (1); nullptr when the frame was not drawn so (not asked, or the game's sources were putting
-    // a picture together of their own with its marks: Video::markObjects). Not part of a save state.
+    // picture are the panel's (1); nullptr when the frame was not drawn so (not asked, or the board's lines checked).
+    // Where the game's sources mark the picture's objects themselves, to put it over another (another game's stage:
+    // fight/guest_stages.h), both pictures keep their marks for them, and the sources put the picture without the panel
+    // over the other too (UnpanelledToChange). Not part of a save state.
     struct Panel {
         bool (*object)(uint32_t tile, uint16_t attributes) = nullptr;
         unsigned layers = 0;
     } panel;
     const uint32_t *Unpanelled() const {
+        return m_panelDrawn ? m_unpanelled.data() : nullptr;
+    }
+    uint32_t *UnpanelledToChange() {
         return m_panelDrawn ? m_unpanelled.data() : nullptr;
     }
     const uint8_t *PanelPixels() const {

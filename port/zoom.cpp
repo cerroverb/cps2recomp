@@ -103,14 +103,24 @@ void Zoom::Both() {
     if (!Possible()) {
         return;
     }
-    if (m_player == kBoth && m_size > 0) {
+    // (round the three: both fighters, by their distance, off)
+    if (m_size > 0 && m_player == kBoth) {
+        m_player = kDistance;
+    } else if (m_size > 0 && m_player == kDistance) {
         m_size = 0;
         m_player = 0;
     } else {
-        m_player = kBoth;
-        m_size = std::max(m_size, 1);
-        m_bothSize = m_shown; // (from where it is: closer only as the fighters allow)
+        StartBoth();
+        return;
     }
+    m_panX = m_panY = 0;
+    Said();
+}
+
+void Zoom::StartBoth() {
+    m_player = kBoth;
+    m_size = std::max(m_size, 1);
+    m_bothSize = m_shown; // (from where it is: closer only as the fighters allow)
     m_panX = m_panY = 0;
     Said();
 }
@@ -120,7 +130,7 @@ void Zoom::Choose(int choice) {
         return;
     }
     if (choice == 3) {
-        Both();
+        StartBoth();
         return;
     }
     if (choice <= 0) {

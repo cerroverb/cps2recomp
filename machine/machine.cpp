@@ -197,8 +197,7 @@ void Machine::RunFrame() {
         }
         m_panelMarks = nullptr;
     }
-    m_panelDrawing = panel.object && drawing && !video.markObjects && !video.markLayers && !video.markFront && !video.layerProbe &&
-                     !nativeVideo.checking;
+    m_panelDrawing = panel.object && drawing && !video.markFront && !video.layerProbe && !nativeVideo.checking;
     if (m_panelDrawing && m_unpanelled.size() != m_picture.size()) {
         m_unpanelled.assign(m_picture.size(), 0);
         m_panelPixels.assign(m_picture.size(), 0);
@@ -305,15 +304,20 @@ void Machine::RunLine() {
 // scroll screens
 void Machine::DrawPanelApart(int row, uint32_t *out, const std::function<void(uint32_t *)> &draw) {
     const size_t at = static_cast<size_t>(row) * m_pictureWidth;
+    // (the game's sources marking the objects themselves (fight/guest_stages.h): their marks kept, in both pictures)
+    const bool gameMarks = video.markObjects;
+    const unsigned gameLayers = video.markLayers;
     video.markObjects = true;
-    video.markLayers = panel.layers;
+    video.markLayers = gameLayers | panel.layers;
     draw(out);
-    video.markObjects = false;
-    video.markLayers = 0;
     for (int x = 0; x < m_pictureWidth; x++) {
         m_panelPixels[at + x] = (out[x] & 0x40000000u) ? 1 : 0;
-        out[x] &= 0x00FFFFFFu;
+        if (!gameMarks) {
+            out[x] &= 0x00FFFFFFu;
+        }
     }
+    video.markObjects = gameMarks;
+    video.markLayers = gameLayers & ~panel.layers;
     // (the game's own objects hidden stay hidden: theirs or the panel's)
     static thread_local bool (*gameHides)(uint32_t, uint16_t) = nullptr;
     static thread_local bool (*panelObject)(uint32_t, uint16_t) = nullptr;
@@ -327,6 +331,7 @@ void Machine::DrawPanelApart(int row, uint32_t *out, const std::function<void(ui
     draw(&m_unpanelled[at]);
     video.hideObject = gameHides;
     video.layerMask = layers;
+    video.markLayers = gameLayers;
 }
 
 // The Z80 and the QSound chip for a stretch of time. The Z80's cycle count is the sound side's clock: it
