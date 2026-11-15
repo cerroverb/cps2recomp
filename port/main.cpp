@@ -120,7 +120,7 @@ namespace {
                                           // 8: widescreen's camera a frame ago; 9: a guest board's, runtime/guest.h;
                                           // 10: classic CPS-1 sound, machine/cps1_sound.h; 11: the tag team's swaps under
                                           // way, the games' livetag.cpp, for online rollback; 12: the classic CPS-1's
-                                          // coin lock-outs, Machine::coinControl)
+                                          // coin lock-outs, Machine::coinControl, and its YM2151's busy time)
 
     // (a path is UTF-8 text: by its wide name on Windows, where a folder with an accent is not in the system's code page)
     FILE *OpenFile(const std::string &path, const wchar_t *wideMode, const char *mode) {

@@ -44,7 +44,18 @@ struct Cps1Sound::Chips : public ymfm::ymfm_interface {
         bool irq = false;
     } t;
 
+    // The YM2151 is busy for a while after each write (64 of its clocks), and a sound program waits on the busy bit
+    // of its status before the next write: when it stops being busy, in the Z80's cycles (the chip's clock is the
+    // Z80's), and the time of the read being answered. Kept in save states from version 12 (Serialize).
+    uint64_t busyEnd = 0, readAt = 0;
+
     // --- ymfm_interface ---
+    void ymfm_set_busy_end(uint32_t clocks) override {
+        busyEnd = t.now + clocks;
+    }
+    bool ymfm_is_busy() override {
+        return readAt < busyEnd;
+    }
     void ymfm_set_timer(uint32_t tnum, int32_t duration) override {
         t.timerAt[tnum] = duration < 0 ? kNever : t.now + static_cast<uint64_t>(duration);
     }
@@ -69,6 +80,8 @@ struct Cps1Sound::Chips : public ymfm::ymfm_interface {
         oki.Reset();
         oki.SetPin7(true);
         t = Times{};
+        busyEnd = 0;
+        readAt = 0;
         t.ymAt = kYmDivider;
         t.okiClocks = oki.Divider();
         t.okiAt = OkiAt();
@@ -98,6 +111,7 @@ void Cps1Sound::WriteYm(unsigned port, uint8_t value, uint64_t now) {
 }
 
 uint8_t Cps1Sound::ReadYm(uint64_t now) {
+    m->readAt = now;
     return m->ym.read_status();
 }
 
@@ -187,6 +201,11 @@ void Cps1Sound::Serialize(Archive &ar) {
     }
     m->oki.Serialize(ar);
     ar.Pod(m->t);
+    if (ar.version == 0 || ar.version >= 12) { // (the YM2151's busy time: from version 12)
+        ar.Pod(m->busyEnd);
+    } else if (!ar.Saving()) {
+        m->busyEnd = 0;
+    }
 }
 
 } // namespace cps2recomp

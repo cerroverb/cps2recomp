@@ -48,6 +48,10 @@ make GAME=ffight run
 - **The coin lock-outs**, new in the toolkit for every classic CPS-1 board: the game writes bits 10 and 11 of 800030
   to 0 at nine credits, and a coin put in then is not seen (MAME's `cps1_coinctrl_w`). Without them the game took a
   coin at nine credits and its coin routine ran where the board's does not.
+- **The YM2151's busy bit**, new in the toolkit for every classic CPS-1 board: the chip is busy for 64 of its clocks
+  after a write, and the sound program waits on it before the next one (ymfm's `ymfm_set_busy_end` and
+  `ymfm_is_busy`, which MAME implements and the toolkit had left out). Without it the Z80 ran ahead of the board's
+  and its timer interrupts came at other places in its music code.
 - **The video registers' writes** (`video_writes`), from a census of attract mode and the listing, so the picture is
   drawn from what the game hands over.
 
@@ -62,6 +66,13 @@ task state byte FF10B0, which depend only on where the 68000 is inside a frame),
 - 108000 frames of made-up play (stage 1 to stage 3: Damnd, the subway, Sodom, the West Side), every tenth frame:
   the same as MAME on all but two frames, both in the RAM test.
 - The picture at the attract mode's frame 1799 is MAME's.
+- The sound, over the 6000 first frames of `movies/smoke_play.txt`: the Z80 writes the YM2151 and the OKI 227,260
+  times on both sides, the same writes in the same order to the first sound command; after that a command can reach
+  the Z80 one of its timer's ticks (3.1 ms) apart, because the port counts its first frame from line 0 and MAME from
+  line 240, so the 68000's commands meet the Z80 at another point of its loop (a board starts at any line).
+  The output's spectrum in 50 ms windows is MAME's to a median correlation of 0.978 (above 0.9 in 99.9% of
+  windows), and its level 95% of MAME's; the waveforms are not alike sample for sample (each side's YM2151 takes a
+  write at another point of its 64-clock sample, and MAME resamples to 48 kHz where the port averages to 24 kHz).
 
 **Next.** Board options, cheats and features of its own.
 
