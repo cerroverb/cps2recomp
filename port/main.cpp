@@ -547,10 +547,12 @@ void RegisterPortFeatures() {
 
     // (run_ahead: Port::RunAhead)
     TheGame().features.push_back({"run_ahead", "Game", "Run-ahead",
-                                  "Shows the game a frame or two further on than it is, so that what you press is seen sooner than "
-                                  "on the board (input lag taken away). The game runs as it does without it; it takes two or three "
-                                  "times the processor. Off by itself in the game's own modes beyond fights and training.",
-                                  0, {"Off", "1 frame", "2 frames"}});
+                                  "Shows the game some frames further on than it is, so that what you press is seen sooner than "
+                                  "on the board (input lag taken away). The game runs as it does without it; each frame ahead takes "
+                                  "one more frame's worth of processor. More frames than the game itself takes to answer a press "
+                                  "leave out the first pictures of its answer. Off by itself in the game's own modes beyond fights "
+                                  "and training.",
+                                  0, {"Off", "1 frame", "2 frames", "3 frames", "4 frames", "5 frames", "6 frames", "7 frames", "8 frames"}});
     // (arcade_timing: machine.h, SetBoardTiming; docs/TIMING.md. Not for a game whose sources decide it: Game::boardTiming)
     if (!TheGame().boardTiming) {
         TheGame().features.push_back({"arcade_timing", "Game", "Arcade timing",
@@ -1484,8 +1486,8 @@ bool Port::Tick() {
             return false;
         }
     }
-    if (hurry && !paused && !MultiGame().empty()) {
-        // A Multi game run's fast forward: kHurry frames, unheard
+    if (hurry && !paused) {
+        // Fast forward (F held, or a Multi game run's left trigger): kHurry frames, unheard
         for (int n = 0; n < kHurry; n++) {
             RunFrame();
             machine->audio.clear();
@@ -1531,7 +1533,7 @@ void Port::Shown(std::vector<uint32_t> &pixels, std::vector<SDL_Rect> *panels, b
     };
     // Stopped or fast-forwarded: said at the bottom all the while (stopped, with the frame's number, for counting
     // frames by stepping); slowed or sped up, for a few seconds after the speed changes (speedTicks)
-    const bool hurried = hurry && !paused && !MultiGame().empty();
+    const bool hurried = hurry && !paused;
     const bool told = paused || hurried || (!menu.FullSpeed() && speedTicks > 0);
     if (told) {
         char text[64];
@@ -2426,11 +2428,14 @@ void Port::RunAhead() {
         if (TheGame().beforeFrame) {
             TheGame().beforeFrame(*machine);
         }
+        // (only the last frame's picture is shown, as with a rollback's frames run again: Machine::drawing)
+        machine->drawing = n == ahead - 1;
         machine->RunFrame();
         if (TheGame().frame) {
             TheGame().frame(*machine);
         }
     }
+    machine->drawing = true;
     PutBackState(kept);
     SetRunningAhead(false);
     machine->audio.resize(sound);

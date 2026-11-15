@@ -143,7 +143,8 @@ struct Port {
     int owed = 0;         // the game's frames due, in ticks of the rate (whole frames run at once)
     bool paused = false;
     int steps = 0;        // frames to go on by while stopped
-    // In a Multi game run (runtime/game.h, MultiGame): held, the game runs kHurry frames a tick, unheard
+    // Fast forward (F held; in a Multi game run, runtime/game.h MultiGame, the left trigger too): the game runs kHurry
+    // frames a tick, unheard
     static constexpr int kHurry = 4;
     bool hurry = false;
     // The speed is said at the bottom for a while after it changes (as the zoom's label), not all the while it is not

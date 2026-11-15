@@ -623,7 +623,8 @@ int RunWindowed(Port &port) {
                 }
                 port.service = keys[SDL_SCANCODE_9] && !KeyBound(SDL_SCANCODE_9);
             }
-            bool hurry = multi && keys[SDL_SCANCODE_F] && !KeyBound(SDL_SCANCODE_F);
+            // (F held: fast forward, in any run but online; the left trigger only in a Multi game run, where it is not Tag)
+            bool hurry = !port.net && keys[SDL_SCANCODE_F] && !KeyBound(SDL_SCANCODE_F);
             // (the camera moved by the arrows with Left Shift held, and by each gamepad's d-pad or stick with its click held)
             if (!port.menu.IsOpen()) {
                 int across = 0, down = 0;
