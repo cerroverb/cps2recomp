@@ -8,7 +8,8 @@ Deck included) and Windows, made by static recompilation: a beat-'em-up for two 
 
 > **Initial classic CPS-1 port, with sound.** The game's picture, controls and arcade music, voices and effects run
 > on the toolkit's shared classic CPS-1 board, as for [Ghouls'n Ghosts](../ghouls/README.md). Its DIP switches are
-> on the Board page; there are no cheats or features of its own yet.
+> on the Board page, and it has cheats (infinite health, lives and time, and free play); there are no features of its
+> own yet.
 
 **No game files are included.** You need your own copy of the game: the arcade ROM set `ffight` (World, set 1), from
 a board you own. This project cannot help you get one.
@@ -62,6 +63,13 @@ reads all but the last as it starts (the listing's routine at 000D46, called onl
 effect after Reset; the demonstrations' sound it reads every frame. With each choice, the game's own settings in its
 work RAM were seen to change (`--dump-ram`).
 
+The Cheats page: infinite health and infinite lives for both players, infinite time (the stage's clock stops at the
+time the stage starts with) and free play (the credits stay at 9). The addresses, and where in the listing they come
+from, are in `game.cfg`. Checked with `movies/smoke_play.txt`: with the first three on, the game runs to its end
+with no game over, health full and the clock stopped, and before player 2 joins the screen differs only in player
+1's lives; with free play, Start alone begins a game. The translated code does what the interpreter does with all
+four on (`make check`, 12000 frames).
+
 **Checked against MAME 0.264**, by the 68000's work RAM (FF0000-FFFFFF, leaving out the stack below FF1000 and the
 task state byte FF10B0, which depend only on where the 68000 is inside a frame), with the same input replayed on both:
 
@@ -78,7 +86,7 @@ task state byte FF10B0, which depend only on where the 68000 is inside a frame),
   windows), and its level 95% of MAME's; the waveforms are not alike sample for sample (each side's YM2151 takes a
   write at another point of its 64-clock sample, and MAME resamples to 48 kHz where the port averages to 24 kHz).
 
-**Next.** Cheats and features of its own.
+**Next.** Features of its own.
 
 ## Reproducible checks
 
