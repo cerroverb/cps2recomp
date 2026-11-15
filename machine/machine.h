@@ -175,6 +175,9 @@ public:
     // The DIP switches, banks A, B and C (a bit 1: the switch off), as the 68000 reads them: the board's (game.cfg's
     // dip, DipAsSet) unless the port sets them (the Board page's choices, before every frame; not in save states)
     uint8_t dip[3] = {0xFF, 0xFF, 0xFF};
+    // The classic CPS-1's coin control word at 800030 (MAME's cps1_coinctrl_w): bits 10 and 11 at 0 lock coin slots 1
+    // and 2 out, so a coin put in then is not seen (a game locks them at its most credits). Starts unlocked.
+    uint16_t coinControl = 0xFFFF;
     const uint8_t *DipAsSet() const {
         return m_roms.board.dip;
     }

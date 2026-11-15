@@ -116,10 +116,11 @@ namespace {
 } // namespace
 
 namespace {
-    constexpr uint32_t kStateVersion = 11; // (5: the 68000's wait kept; 6: the custom soundtrack's place; 7: the board timing's palette copy;
+    constexpr uint32_t kStateVersion = 12; // (5: the 68000's wait kept; 6: the custom soundtrack's place; 7: the board timing's palette copy;
                                           // 8: widescreen's camera a frame ago; 9: a guest board's, runtime/guest.h;
                                           // 10: classic CPS-1 sound, machine/cps1_sound.h; 11: the tag team's swaps under
-                                          // way, the games' livetag.cpp, for online rollback)
+                                          // way, the games' livetag.cpp, for online rollback; 12: the classic CPS-1's
+                                          // coin lock-outs, Machine::coinControl)
 
     // (a path is UTF-8 text: by its wide name on Windows, where a folder with an accent is not in the system's code page)
     FILE *OpenFile(const std::string &path, const wchar_t *wideMode, const char *mode) {

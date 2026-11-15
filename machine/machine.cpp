@@ -114,6 +114,7 @@ void Machine::Reset() {
     soundtrack.Reset();
     memset(cpsA, 0, sizeof(cpsA));
     memset(cpsB, 0, sizeof(cpsB));
+    coinControl = 0xFFFF;
     memset(objectRegs, 0, sizeof(objectRegs));
     // (where the video chip's memory areas are until the game says)
     cpsA[0] = 0x9200;
@@ -777,7 +778,9 @@ uint16_t Machine::ReadCps1(uint32_t address) {
         return static_cast<uint16_t>(~(stick(p1) | (stick(p2) << 8)));
     }
     if (address == 0x800018) {
-        const unsigned pressed = ((p1 & kCoin) ? 0x01 : 0) | ((p2 & kCoin) ? 0x02 : 0) | (serviceButton ? 0x04 : 0) | ((p1 & kStart) ? 0x10 : 0) |
+        const bool open1 = !m_roms.board.qsound ? (coinControl & 0x0400) != 0 : true;
+        const bool open2 = !m_roms.board.qsound ? (coinControl & 0x0800) != 0 : true;
+        const unsigned pressed = ((p1 & kCoin) && open1 ? 0x01 : 0) | ((p2 & kCoin) && open2 ? 0x02 : 0) | (serviceButton ? 0x04 : 0) | ((p1 & kStart) ? 0x10 : 0) |
                                  ((p2 & kStart) ? 0x20 : 0) | (testSwitch ? 0x40 : 0);
         return static_cast<uint16_t>(((~pressed & 0xFF) << 8) | 0xFF);
     }
@@ -892,6 +895,10 @@ void Machine::WriteCps1(uint32_t address, uint16_t value, uint16_t mask) {
                 fprintf(stderr, "68000 latch %d = %02X (frame %llu)\n", address >= 0x800188 ? 2 : 1, value & 0xFF, static_cast<unsigned long long>(frame));
             }
         }
+        return;
+    }
+    if (address == 0x800030 && !m_roms.board.qsound) {
+        coinControl = static_cast<uint16_t>((coinControl & ~mask) | (value & mask)); // (the coin lock-outs: ReadCps1)
         return;
     }
     if ((address >= 0x800030 && address < 0x800038) || address == 0xF1C004 || (address >= 0x800180 && address < 0x800190)) {
@@ -1118,6 +1125,11 @@ void Machine::Serialize(Archive &ar) {
         m_palettePending = false;
     }
     if (m_classic) {
+        if (ar.version == 0 || ar.version >= 12) { // (the coin lock-outs: from version 12)
+            ar.Pod(coinControl);
+        } else if (!ar.Saving()) {
+            coinControl = 0xFFFF;
+        }
         if (ar.version == 0 || ar.version >= 10) { // (the classic CPS-1's sound: from version 10)
             m_classic->Serialize(ar);
             ar.Pod(m_classicRam);

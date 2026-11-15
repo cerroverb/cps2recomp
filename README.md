@@ -54,6 +54,7 @@ file). Only the versions named below work for each game, and this project cannot
 | [**Street Fighter II: Champion Edition**](games/sf2ce/README.md) (1992, CPS-1) | `sf2ce` (World 920513) | The bosses playable, mirror matches; on the classic CPS-1 |
 | [**Street Fighter II: Hyper Fighting**](games/sf2hf/README.md) (1992, CPS-1) | `sf2hf` (World 921209) | Faster, new moves and colours; on the classic CPS-1 |
 | [**Ghouls'n Ghosts**](games/ghouls/README.md) (1988, CPS-1) | `ghouls` (World) | Platform game; classic CPS-1 with YM2151 and OKI sound |
+| [**Final Fight**](games/ffight/README.md) (1989, CPS-1) | `ffight` (World, set 1) | Beat-'em-up for two players; classic CPS-1 with YM2151 and OKI sound |
 | [**Cadillacs and Dinosaurs**](games/dino/README.md) (1993, CPS-1) | `dino` (World 930201) | Beat-'em-up: three players, a stage to start at, score attack |
 | [**The Punisher**](games/punisher/README.md) (1993, CPS-1) | `punisheru` (USA 930422) | Beat-'em-up: two players, a stage to start at, score attack |
 | [**Giga Wing**](games/gigawing/README.md) (1999) | `gigawing` (USA 990222) | Shoot-'em-up: training mode, true hit boxes, score attack, caravan, boss rush |
@@ -243,7 +244,7 @@ The repository holds no game data and nothing derived from it.
 
 This project is not affiliated with, endorsed by, or sponsored by Capcom or Marvel. *Street Fighter*, *Super Puzzle
 Fighter*, *Super Gem Fighter*, *Pocket Fighter*, *Vampire Savior*, *Vampire Hunter*, *Night Warriors*, *Darkstalkers*, *Mega Man*,
-*Ghouls'n Ghosts*, *Strider*, *Captain Commando*, *Cyberbots*, *Giga Wing*, *Progear* and *Dimahoo* are trademarks of Capcom Co., Ltd.; *X-Men*, *Marvel Super Heroes*,
+*Ghouls'n Ghosts*, *Final Fight*, *Strider*, *Captain Commando*, *Cyberbots*, *Giga Wing*, *Progear* and *Dimahoo* are trademarks of Capcom Co., Ltd.; *X-Men*, *Marvel Super Heroes*,
 *The Punisher* and their characters are trademarks of Marvel Characters, Inc.; *Alien vs. Predator* and *Cadillacs and Dinosaurs* are
 trademarks of their owners; "CPS-1", "CPS-2" and "QSound" are names and trademarks of their owners, used here only to
 say what the programs work with.
