@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- **Run-ahead up to 8 frames** (Game page, every game): the choices were off, 1 or 2 frames. More frames than a game
+  itself takes to answer a press leave out the first pictures of its answer (Final Fight answers in 3 to 4).
+- **Fast forward in every game**: F held runs the game four times as fast, without sound, as it did only in a Multi
+  game run. Not online. The left trigger stays Tag outside a Multi game run.
+
 ## 1.5.0
 
 **Ball battle, five more games, and modes online.** Ball battle, a new ball game mode, comes to the Vampire Savior
